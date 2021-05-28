@@ -1,4 +1,10 @@
-<p id="notice"></p>
+<% if @book.errors.any? %>
+  <%= pluralize(@book.errors.count, "error") %>prohibited this obj from being saved
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
 <div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3">
@@ -52,7 +58,8 @@
         <tbody>
     		 <% @books.each do |book| %>
     		  <tr>
-      			<td><%= book.title %></td>
+    		    <td><%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no-icon.jpeg"%></td>
+      			<td><%= link_to book.title, book_path(book) %></td>
       			<td><%= book.body %></td>
       		</tr>
       		<% end %>

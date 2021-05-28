@@ -8,7 +8,6 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,10 +17,20 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="navbar-collapse collapse show" id="navbarNavDropdown" style="">
+
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
               <li>
-                <%= link_to "logout", destroy_user_session_path, method: :delete, class: "bookers" %>
+                <%= link_to "Home", user_path(current_user), class: "bookers fas fa-home nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to "Users", users_path, class: "bookers fas fa-users nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to "Books", books_path, class: "bookers fas fa-book-open nav-link text-light" %>
+              </li>
+              <li>
+                <%= link_to "logout", destroy_user_session_path, method: :delete, class: "bookers fas fa-sign-out-alt nav-link text-light" %>
               </li>
               <% else %>
               <li>
@@ -42,7 +51,12 @@
         </div>
       </nav>
     </header>
-    <%= yield %>
+    <main>
+      <p id="notice">
+        <%= flash[:notice] %>
+      </p>
+      <%= yield %>
+      </main>
     <footer>
       <div class="container mt-5">
   	    <div class="row">
@@ -52,6 +66,5 @@
         </div>
       </div>
     </footer>
-
   </body>
 </html>
