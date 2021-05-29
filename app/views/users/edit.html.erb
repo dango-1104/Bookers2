@@ -1,8 +1,10 @@
 <% if @user.errors.any? %>
-  <%= pluralize(@user.errors.count, "error") %> prohibited this obj from being saved
-  <% @user.errors.full_messages.each do |message| %>
-    <%= message %>
-  <% end %>
+  <%= @user.errors.count %> errors prohibited this obj from being saved
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+  　<li><%= message %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <div class="container">
