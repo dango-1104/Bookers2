@@ -1,13 +1,14 @@
-<% if @book.errors.any? %>
-  <%= pluralize(@book.errors.count, "error") %>prohibited this obj from being saved
+<div class="container px-5 px-sm-0" >
+  <% if @book.errors.any? %>
+  <div class="error" >
+    <%= pluralize(@book.errors.count, "error") %>prohibited this obj from being saved
+  </div>
   <ul>
     <% @book.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
+    <li class="error" ><%= message %></li>
     <% end %>
   </ul>
-<% end %>
-
-<div class="container px-5 px-sm-0">
+  <% end %>
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
