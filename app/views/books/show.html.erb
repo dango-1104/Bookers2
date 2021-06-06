@@ -52,7 +52,7 @@
       			<td><% if @book.favorited_by?(current_user) %>
               <p>
                 <%= link_to book_favorites_path(@book), method: :delete do %>
-                  ♥<%= @post_image.favorites.count %>
+                  ♥<%= @book.favorites.count %>
                 <% end %>
               </p>
               <% else %>
@@ -76,19 +76,17 @@
   		<div class="comments">
   		  <tr>
           <% @book.book_comments.each do |book_comment| %>
-            <td><%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no-icon.jpeg"%><br/></td>
+            <td><%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no-icon.jpeg"%></td>
             <td><%= book_comment.comment %></td>
-            <% if @book.user == current_user %>
-            <div class="comment-delete">
+            <% if book_comment.user == current_user %>
               <td><%= link_to "destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger"%></td>
-            </div>
             <% end %>
           <% end %>
         </tr>
       </div>
       <div class="new-comment">
         <%= form_with(model:[@book, @book_comment], local: true) do |f| %>
-          <%= f.text_area :comment %>
+          <%= f.text_area :comment, size:"90×5" %>
           <h6><%= f.submit "送信" %></h6>
         <% end %>
       </div>
