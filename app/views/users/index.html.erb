@@ -11,7 +11,7 @@
         </tr>
         <tr>
 	        <th>introduction</th>
-	      <th><%= @user.introduction %></th>
+	        <th><%= @user.introduction %></th>
         </tr>
         </tbody>
       </table>
@@ -52,6 +52,16 @@
     		  <tr>
     		    <td><%= attachment_image_tag user, :profile_image, :fill, 40, 40, fallback: "no-icon.jpeg"%></td>
       			<td><%= user.name %></td>
+      			<td><%= link_to "フォロー数: #{user.followings.count}", user_followings_path(user.id) %></td>
+      			<td><%= link_to "フォロワー数: #{user.followers.count}", user_followers_path(user.id) %></td>
+        		<td><% if current_user.id != user.id %>
+                  <% if current_user.following?(user) %>
+                    <th><%= link_to "Unfollow", user_relationships_path(user.id), method: :delete %></th>
+                  <% else %>
+                    <th><%= link_to "Follow", user_relationships_path(user.id), method: :post %></th>
+                  <% end %>
+                <% end %></td>
+
       			<td><%= link_to "Show", user_path(user) %></td>
       		</tr>
       		<% end %>
