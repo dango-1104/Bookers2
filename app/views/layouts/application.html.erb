@@ -54,6 +54,8 @@
     <main>
       <p id="notice">
         <%= flash[:notice] %>
+        <%= render 'books/search', range: @range, users: @users, books: @books %>
+
       </p>
       <%= yield %>
       </main>
